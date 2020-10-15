@@ -33,7 +33,7 @@ export default class UsersController{  // Gestión de los usuarios
 
     ///obtener lista de usuarios
     public getLista(){
-        return this.lista;
+        return this.lista.filter(usr=>usr.nombre!=='usuario-anónimo');
     }
 
      ///obtener un usuario

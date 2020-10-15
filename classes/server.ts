@@ -30,16 +30,19 @@ export default class Server{  //Singleton
         this.io.on('connection', cliente=>{
 
             // Conectar usuario
-            socket.conectarCliente(cliente);
+            socket.conectarCliente(cliente,this.io);
 
             // Configurar usuario
-            socket.configurarUsuario(cliente,this.io);            
+            socket.configurarUsuario(cliente,this.io);  
+            
+            //obtener usuarios activos
+            socket.dameListaUsuarios(cliente,this.io);
 
             //Mensajes
             socket.mensaje(cliente,this.io);
 
             // Desconectar
-            socket.desconectar(cliente);
+            socket.desconectar(cliente,this.io);
 
         });
     }

@@ -1,5 +1,6 @@
 import {Router,Request,Response} from 'express';
 import Server from '../classes/server';
+import UsersController from '../controllers/users-controller';
 
 const router = Router();
 
@@ -8,6 +9,34 @@ router.get('/mensajes',(req:Request, res:Response)=>{
     res.json({
         ok:true,
         mensaje:'Todo está bien'
+    });
+});
+
+// Api REST para obtener los ids de los usuarios
+router.get('/usuarios',(req:Request, res:Response)=>{
+    const server = Server.instance;
+    server.io.clients((err:any,clientes:string[])=>{
+        if(err){
+            return res.json({
+                ok:false,
+                err
+            })
+        }
+
+        res.json({
+            ok:true,
+            clientes:clientes
+        });
+
+    })
+
+});
+
+router.get('/usuarios-detalle',(req:Request, res:Response)=>{
+    const usuariosConectados= UsersController.instance;
+    res.json({
+        ok:true,
+        clientes: usuariosConectados.getLista() 
     });
 });
 
