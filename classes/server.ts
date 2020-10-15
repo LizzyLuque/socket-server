@@ -29,8 +29,11 @@ export default class Server{  //Singleton
         console.log('Escuchando conexiones - sockets');
         this.io.on('connection', cliente=>{
 
-            // Aqui se crean los eventos
-            console.log('Cliente conectado -- IP:');
+            // Conectar usuario
+            socket.conectarCliente(cliente);
+
+            // Configurar usuario
+            socket.configurarUsuario(cliente,this.io);            
 
             //Mensajes
             socket.mensaje(cliente,this.io);
